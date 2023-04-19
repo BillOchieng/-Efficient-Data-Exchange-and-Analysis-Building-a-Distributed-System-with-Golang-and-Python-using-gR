@@ -1,20 +1,25 @@
-# On the Python side, you could use the `requests` library to send a request to the Golang server and receive the JSON data:
-
 import requests
-
+import json
 import cProfile
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-response = requests.get("http://localhost:8080/")
-data = response.json()
+# I use try and except blocks to handle the JSONDecodeError exception that could occur if the response from the server is not a valid JSON string.
+# If the exception is raised, I print an error message and set the data variable to an empty dictionary.
+# This way, the rest of the code can still run without errors, even if there was a problem with the data received from the server.
+try:
+    response = requests.get("https://example.com/data")
+    data = json.loads(response.text)
+except json.JSONDecodeError as e:
+    print(f"Error decoding JSON: {e}")
+    data = {}
 
 # Perform data analysis on data
 
-# In this example, we use the `get` method from the `requests` library to send a GET request to the Golang server running on `localhost:8080`. We then use the `json` method to decode the JSON data received from the server.
+# I use the `get` method from the `requests` library to send a GET request to the Golang server running on `localhost:8080`.
+# We then use the `json` method to decode the JSON data received from the server.
 
-# Once you have received the data in Python, you can use libraries like NumPy, Pandas, and Matplotlib to perform data analysis and visualization.
+# Once I have received the data in Python, I can use libraries like NumPy, Pandas, and Matplotlib to perform data analysis and visualization.
 
 counter = 0
 counter_data = []
