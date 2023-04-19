@@ -1,4 +1,4 @@
-- In this project, I have written a Go program that demonstrates concurrency using Goroutines and Mutexes. The program uses a shared integer variable called counter and a sync.Mutex variable called mutex to synchronize access to the counter. The program also includes a function called fetchWebData() that fetches data from a web page.
+**In this project**, I have written a Go program that demonstrates concurrency using Goroutines and Mutexes. The program uses a shared integer variable called counter and a sync.Mutex variable called mutex to synchronize access to the counter. The program also includes a function called fetchWebData() that fetches data from a web page.
 
 To complement the Go program, I have also written a Python script that defines a global variable "counter" and a list "counter_data" to store the counter values over time. The increment() and decrement() functions update the counter variable and append the current value to the counter_data list. The script also uses the cProfile module to profile the performance of the code and saves the resulting counter data to a CSV file.
 
