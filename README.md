@@ -1,4 +1,4 @@
-# In this paper, I discuss the characteristics of concurrency in Go programs and a deployment strategy for detecting races continuously using dynamic race detection
+# "Exploring Concurrency in Go Programs and Continuous Dynamic Race Detection Deployment Strategies"
 
 This is a Go program that demonstrates concurrency using Goroutines and Mutexes.
 
