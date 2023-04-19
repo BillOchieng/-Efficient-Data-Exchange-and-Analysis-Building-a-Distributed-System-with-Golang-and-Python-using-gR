@@ -7,3 +7,4 @@ bin:
 
 thread: thread.go bin
 	go build --o bin thread.go
+

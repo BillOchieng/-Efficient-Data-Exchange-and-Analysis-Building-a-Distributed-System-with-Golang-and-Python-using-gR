@@ -1,0 +1,40 @@
+setup: |
+  cd project/&& make all
+  echo "Done installing project dependencies!"
+---
+
+# Reminder for ^^^:
+
+
+- project/thread.go:
+    - description: Ensure that the thread.go file exists in project
+      check: ConfirmFileExists
+    - description:  run-thread.go
+      check: MatchFileFragment
+      options:
+        fragment: 
+        count: 0
+        exact: true
+    - description: Run the bin/thread program in the project and ensure it does not crash
+      command: ./project/bin/thread
+    - description: 
+      check: MatchFileFragment
+      options:
+        fragment: 
+        count: 0
+        exact: false
+    
+
+# perform checks on a file
+- writing/update.md:
+  
+
+# perform checks on a file
+- writing/report.md:
+    
+
+# perform checks on a file
+- writing/demonstration.md:
+    -
+# count number of commits in the GitHub repository
+-
