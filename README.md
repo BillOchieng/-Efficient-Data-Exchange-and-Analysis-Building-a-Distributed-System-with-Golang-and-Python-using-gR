@@ -1,9 +1,16 @@
 # In this paper, I discuss the characteristics of concurrency in Go programs and a deployment strategy for detecting races continuously using dynamic race detection
 
-- Based on observed (including fixed) data races, we elaborate on
-the Go language paradigms that make it easy to introduce
-races in Go programs.
-- I hope that this work will inspire future work towards enabling dynamic race detection during continuous integration, developing program analyses for detecting Go races, and designing language features such that their interplay with concurrency does not easily introduce races.
+This is a Go program that demonstrates concurrency using Goroutines and Mutexes.
+
+The program first defines a shared integer variable called counter, and a sync.Mutex variable called mutex that will be used to synchronize access to the shared counter.
+
+Then, the program defines two functions: increment() and decrement(), both of which perform 1000 increments and decrements on the shared counter variable while acquiring and releasing the mutex to synchronize access to the counter.
+
+The program also defines a third function fetchWebData(), which fetches data from a web page.
+
+In the main function, the program initializes the shared counter variable, and launches 5 Goroutines to concurrently execute the increment(), decrement(), and fetchWebData() functions. The program then waits for 2 seconds using the time.Sleep() function to allow the Goroutines to complete before printing the final value of the counter variable.
+
+Overall, the program demonstrates how Go can be used to write concurrent programs using Goroutines and Mutexes to synchronize access to shared variables.
 
 # python
 
