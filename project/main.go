@@ -7,21 +7,25 @@ import (
     "net/http"
 )
 
+// home handles HTTP requests to the '/' endpoint
 func home(w http.ResponseWriter, r *http.Request) {
     // Write the response to the HTTP response writer
     fmt.Fprintf(w, "Welcome to Bill's Go server! 🚀")
 }
 
+// contact handles HTTP requests to the '/contact' endpoint
 func contact(w http.ResponseWriter, r *http.Request) {
     // Write the response to the HTTP response writer
     fmt.Fprintf(w, "Email: ochieng@allegheny.com")
 }
 
+// FormData represents the expected structure of the form data in HTTP requests to the '/submit' endpoint
 type FormData struct {
     Name  string `json:"name"`
     Email string `json:"email"`
 }
 
+// submit handles HTTP requests to the '/submit' endpoint
 func submit(w http.ResponseWriter, r *http.Request) {
     // Parse the form data from the request body
     decoder := json.NewDecoder(r.Body)
