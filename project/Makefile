@@ -1,10 +1,10 @@
-all: thread
+all: main
 
 clean:
-	rm -f bin/thread
+	rm -f bin/main
 bin:
 	mkdir bin
 
-thread: thread.go bin
-	go build --o bin thread.go
+thread: main.go bin
+	go build --o bin main.go
 
