@@ -1,6 +1,7 @@
 package main
 
 import (
+    "encoding/json"
     "fmt"
     "log"
     "net/http"
@@ -16,20 +17,35 @@ func contact(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Email: ochieng@allegheny.com")
 }
 
+type FormData struct {
+    Name  string `json:"name"`
+    Email string `json:"email"`
+}
+
 func submit(w http.ResponseWriter, r *http.Request) {
     // Parse the form data from the request body
-    err := r.ParseForm()
+    decoder := json.NewDecoder(r.Body)
+    var formData FormData
+    err := decoder.Decode(&formData)
     if err != nil {
         http.Error(w, "Failed to parse form data", http.StatusBadRequest)
         return
     }
 
     // Get the name and email values from the form data
-    name := r.FormValue("name")
-    email := r.FormValue("email")
+    name := formData.Name
+    email := formData.Email
 
     // Write the response to the HTTP response writer
-    fmt.Fprintf(w, "Thanks for submitting the form, %s! We'll contact you at %s.", name, email)
+    response := make(map[string]string)
+    response["message"] = fmt.Sprintf("Thanks for submitting the form, %s! We'll contact you at %s.", name, email)
+    jsonResponse, err := json.Marshal(response)
+    if err != nil {
+        http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+        return
+    }
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(jsonResponse)
 }
 
 func main() {
