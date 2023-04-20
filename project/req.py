@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # If the exception is raised, I print an error message and set the data variable to an empty dictionary.
 # This way, the rest of the code can still run without errors, even if there was a problem with the data received from the server.
 try:
-    response = requests.get("https://example.com/data")
+    response = requests.get("https://api.warframe.market/v1/items/")
     data = json.loads(response.text)
 except json.JSONDecodeError as e:
     print(f"Error decoding JSON: {e}")
