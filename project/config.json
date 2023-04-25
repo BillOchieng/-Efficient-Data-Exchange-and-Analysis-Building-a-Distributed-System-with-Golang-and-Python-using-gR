@@ -1,4 +1,4 @@
 {
-    "port": "8200",
-    "website": "https://example.com"
+    "ServerPort": "8080",
+    "UsersFile": "users.json"
 }

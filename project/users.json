@@ -1,0 +1,70 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "phone": "555-555-1234"
+        },
+        {
+            "id": 2,
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "phone": "555-555-5678"
+        },
+        {
+            "id": 3,
+            "name": "Bob Smith",
+            "email": "bob.smith@example.com",
+            "phone": "555-555-9012"
+        },
+        {
+            "id": 4,
+            "name": "Bill",
+            "email": "bill@example.com",
+            "phone": "555-555-1111"
+        },
+        {
+            "id": 5,
+            "name": "Shereen",
+            "email": "shereen@example.com",
+            "phone": "555-555-2222"
+        },
+        {
+            "id": 6,
+            "name": "Kari",
+            "email": "kari@example.com",
+            "phone": "555-555-3333"
+        },
+        {
+            "id": 7,
+            "name": "Wolfie",
+            "email": "wolfie@example.com",
+            "phone": "555-555-4444"
+        },
+        {
+            "id": 8,
+            "name": "Mandy",
+            "email": "mandy@example.com",
+            "phone": "555-555-5555"
+        },
+        {
+            "id": 9,
+            "name": "Benny",
+            "email": "benny@example.com",
+            "phone": "555-555-6666"
+        },
+        {
+            "id": 10,
+            "name": "Peter",
+            "email": "peter@example.com",
+            "phone": "555-555-7777"
+        },
+        {
+            "id": 11,
+            "name": "Tiaks",
+            "email": "tiaks@example.com",
+            "phone": "555-555-8888"
+        }
+    ]
+}
