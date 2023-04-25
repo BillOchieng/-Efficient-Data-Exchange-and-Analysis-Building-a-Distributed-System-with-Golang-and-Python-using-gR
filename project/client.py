@@ -16,9 +16,10 @@ else:
     print(f"Error: {response.status_code}")
 
 # Send an HTTP POST request to the '/submit' endpoint in the Go code with JSON data
-with open('data.json') as f:
-    data = json.load(f)
-
+data = {
+    "name": "Bill Ochieng",
+    "email": "ochieng01@allegheny.edu"
+}
 json_data = json.dumps(data)
 headers = {'Content-type': 'application/json'}
 response = requests.post('http://localhost:8200/submit', data=json_data, headers=headers)
