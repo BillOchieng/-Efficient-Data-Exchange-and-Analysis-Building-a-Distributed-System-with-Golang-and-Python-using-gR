@@ -2,30 +2,34 @@
 
 ## Introduction
 
-This project is a demonstration of a simple client-server application that communicates via HTTP protocol. The server-side of the application is written in Go programming language while the client-side is implemented using Python programming language. The project provides endpoints for a homepage, a contact page, and a form submission page. The server receives JSON data from the client and sends back a JSON response.
+The project is a simple web application written in the Go programming language that provides a basic RESTful API to retrieve and manipulate user data. The application makes use of a configuration file (config.json), a JSON data file for storing user data (users.json), and a client-side Python script (client.py) to interact with the API.
 
-## Server-Side Implementation
+## Files
 
-The server-side implementation of the application is written in Go programming language. It consists of four main components; the main function, endpoints, request handlers, and configuration file. The main function is the entry point of the application. It reads the configuration file that specifies the port and website details, defines the HTTP endpoints and request handlers, and starts the server on the specified port.
+*config.json:* This file contains the configuration settings for the web application, such as the server port and website URL.
 
-** The application provides three endpoints:
+*users.json:* This file is used to store user data in JSON format. The User struct in main.go maps to the JSON data structure in this file.
 
-'/' - The homepage endpoint that returns a welcome message.
-'/contact' - The contact page endpoint that returns an email address.
-'/submit' - The form submission endpoint that receives a JSON object from the client containing name and email values, and sends back a JSON response.
-The request handlers for the endpoints are implemented as separate functions. They receive HTTP requests, process them, and send back HTTP responses. For example, the request handler for the '/submit' endpoint parses the JSON data from the request body, extracts the name and email values, generates a response JSON object, and sends it back to the client.
+*client.py:* This is a simple client script written in Python that demonstrates how to interact with the RESTful API provided by the web application. The script allows users to create, read, update, and delete user data.
 
-## Client-Side Implementation
+*main.go:* This is the main source code file for the web application. It contains the handlers for each of the API endpoints, as well as the main function that initializes the HTTP server.
 
-The client-side implementation of the application is written in Python programming language. It consists of a single file that sends HTTP requests to the server and receives HTTP responses. The requests are sent using the requests library, and the data is sent and received in JSON format.
+## Working together
 
-** The client sends three HTTP requests to the server:
+- When the web application is launched, the main function in 'main.go' reads the configuration settings from "config.json", initializes a user store by reading the user data from "users.json", and then starts an HTTP server on the *specified port*. The HTTP server listens for *incoming requests* and *routes them to the appropriate handler function based on the URL path*.
 
-GET request to the '/' endpoint to retrieve the homepage message.
-GET request to the '/contact' endpoint to retrieve the contact email address.
-POST request to the '/submit' endpoint to submit a form containing name and email values.
-The client handles the HTTP responses by checking the status codes and reading the response data. For example, the client checks the status code of the HTTP response to the '/submit' endpoint to verify that the data was successfully submitted. It then reads the JSON response object sent by the server and prints the message to the console.
+## The API endpoints provided by the web application are
 
-## Summary
+/: This endpoint returns a simple welcome message.
 
-This project is a simple demonstration of a client-server application using HTTP protocol. The server-side is implemented in Go programming language while the client-side is implemented in Python programming language. The server provides three endpoints; a homepage, a contact page, and a form submission page, while the client sends HTTP requests to these endpoints to retrieve and submit data. The project can be extended by adding more endpoints and implementing additional features such as authentication and database integration.
+/contact: This endpoint returns the contact email address for the website.
+
+/submit: This endpoint is used to submit a form with name and email fields. It returns a JSON response thanking the user for submitting the form and indicating that they will be contacted at the provided email address.
+
+/users: This endpoint returns a list of all users in JSON format. It also supports creating new users, updating existing users, and deleting users.
+
+## Real world application
+
+- This project can be used as a starting point for building more complex RESTful API services. It demonstrates how to handle HTTP requests, parse JSON data, and interact with a file-based data store. With additional development, this web application could be extended to support additional API endpoints, more complex data models, and integration with external services or databases.
+
+- A real-world application is a customer relationship management (CRM) system. The basic user data model provided in this project could be expanded to include additional fields such as customer addresses, phone numbers, and order histories. Additional API endpoints could be added to support features such as searching for customers by name, creating and updating orders, and generating reports on customer activity.
