@@ -18,6 +18,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to Bill's Go server! 🚀")
 }
 
+
 func contact(w http.ResponseWriter, r *http.Request) {
 	// Write the response to the HTTP response writer
 	fmt.Fprintf(w, "Email: ochieng@allegheny.com")
