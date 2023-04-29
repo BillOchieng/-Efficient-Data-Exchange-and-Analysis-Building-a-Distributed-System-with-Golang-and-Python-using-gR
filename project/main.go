@@ -1,5 +1,5 @@
 package main
-
+//go run main.go
 import (
 	"encoding/json"
 	"fmt"

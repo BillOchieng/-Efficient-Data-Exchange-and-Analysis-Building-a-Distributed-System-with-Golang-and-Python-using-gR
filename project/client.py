@@ -6,6 +6,7 @@ base_url = "http://localhost:8080"
 welcome_url = f"{base_url}/"
 contact_url = f"{base_url}/contact"
 submit_url = f"{base_url}/submit"
+users_url = f"{base_url}/users"
 
 # Simple welcome message
 response = requests.get(welcome_url)
@@ -19,16 +20,21 @@ print(response.text)
 with open("users.json") as f:
     users = json.load(f)["users"]
 
-# Loop through the users and send a POST request to the Go server
-for user in users:
-    url = f"{base_url}/users"
-    data = {
-        "name": user["name"],
-        "email": user["email"],
-        "phone": user["phone"]
-    }
-    response = requests.post(url, json=data)
-    print(response.json())
+# Command-line interface
+while True:
+    query = input("Enter a user's name to display their information, or type 'quit' to exit: ")
+    if query == "quit":
+        break
+    found = False
+    for user in users:
+        if user["name"].lower() == query.lower():
+            found = True
+            print(f"Name: {user['name']}")
+            print(f"Email: {user['email']}")
+            print(f"Phone: {user['phone']}")
+            break
+    if not found:
+        print(f"No user found with name '{query}'.")
 
 # Submit a form with name and email fields
 form_data = {
