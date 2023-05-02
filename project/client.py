@@ -1,5 +1,8 @@
 import requests
 import json
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
 # Endpoint URLs
 base_url = "http://localhost:8080"
@@ -8,39 +11,49 @@ contact_url = f"{base_url}/contact"
 submit_url = f"{base_url}/submit"
 users_url = f"{base_url}/users"
 
-# Simple welcome message
-response = requests.get(welcome_url)
-print(response.text)
+# Define the database connection
+engine = create_engine("sqlite:///users.db", echo=True)
 
-# Contact email address
-response = requests.get(contact_url)
-print(response.text)
+# Define the User model
+Base = declarative_base()
 
-# Read the users from the JSON file
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+
+
+# Create the table if it doesn't exist
+Base.metadata.create_all(engine)
+
+# Connect to the database and create a session
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Read the users from the JSON file and add them to the database
 with open("users.json") as f:
     users = json.load(f)["users"]
+    for user in users:
+        session.add(User(name=user["name"], email=user["email"], phone=user["phone"]))
+    session.commit()
 
 # Command-line interface
 while True:
-    query = input("Enter a user's name to display their information, or type 'quit' to exit: ")
+    query = input(
+        "Enter a user's name to display their information, or type 'quit' to exit: "
+    )
     if query == "quit":
         break
-    found = False
-    for user in users:
-        if user["name"].lower() == query.lower():
-            found = True
-            print(f"Name: {user['name']}")
-            print(f"Email: {user['email']}")
-            print(f"Phone: {user['phone']}")
-            break
-    if not found:
+    user = session.query(User).filter_by(name=query).first()
+    if user:
+        print(f"Name: {user.name}")
+        print(f"Email: {user.email}")
+        print(f"Phone: {user.phone}")
+    else:
         print(f"No user found with name '{query}'.")
 
-# Submit a form with name and email fields
-form_data = {
-    "name": "John Doe",
-    "email": "john.doe@example.com"
-}
-headers = {"Content-Type": "application/json"}
-response = requests.post(submit_url, data=json.dumps(form_data), headers=headers)
-print(response.text)
+# Disconnect from the database
+session.close()

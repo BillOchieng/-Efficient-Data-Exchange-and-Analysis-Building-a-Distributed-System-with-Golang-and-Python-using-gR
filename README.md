@@ -2,6 +2,27 @@
 
 ## Development of a Basic Web-Based Form Application with Database Integration: A Technical Overview
 
+## How to run my GO SERVER and it's output
+
+```go
+rawlings@Bills-MacBook-Pro project % go run main.go
+2023/05/01 15:42:13 Starting server on port 8080
+```
+
+## How to run my python code and it's interactive output
+
+```py
+rawlings@Bills-MacBook-Pro project % python3 client.py
+
+Welcome to Bill's Go server! 🚀
+Email: ochieng@allegheny.com
+Enter a user's name to display their information, or type 'quit' to exit: Shereen
+Name: Shereen
+Email: shereen@example.com
+Phone: 555-555-2222
+Enter a user's name to display their information, or type 'quit' to exit: 
+```
+
 ## Introduction
 
 - This project is a simple web application that provides a basic RESTful API to retrieve and manipulate user data. The application is developed using the Go programming language and is integrated with a database to store user data. The project includes a configuration file (config.json), a client-side Python script (client.py) to interact with the API, and the main source code file for the web application (main.go).

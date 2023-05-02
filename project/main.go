@@ -1,5 +1,5 @@
 package main
-//go run main.go
+
 import (
 	"encoding/json"
 	"fmt"
@@ -44,6 +44,11 @@ func NewUserStore(filename string) (*UserStore, error) {
 }
 
 func (us *UserStore) UsersHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	jsonResponse, err := json.Marshal(us.users)
 	if err != nil {
 		http.Error(w, "Failed to create JSON response", http.StatusInternalServerError)
@@ -63,6 +68,11 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func submitHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	decoder := json.NewDecoder(r.Body)
 	var data map[string]string
 	err := decoder.Decode(&data)
@@ -121,7 +131,6 @@ func main() {
 	http.HandleFunc("/users", userStore.UsersHandler)
 
 	// Start the HTTP server on the configured port
-	// Start the HTTP server on the configured port
 	log.Printf("Starting server on port %s\n", config.Port)
-	log.Fatal(http.ListenAndServe(":"+config.Port, nil))
-}
+	log.Println(http.ListenAndServe(":"+config.Port, nil))
+	}
