@@ -121,7 +121,7 @@ Enter a user's name to display their information, or type 'quit' to exit:
 
 
 
-*CAN BE CONTINUED TO A BIGGER PROJECT 🚀😃
+** CAN BE CONTINUED TO A BIGGER PROJECT 🚀😃 **
 
 - The type of concept demonstrated in the code is a basic client-server architecture used for communication between a client application and a server application over the internet. This type of architecture is commonly used in many real-time applications, such as online gaming, chat applications, and video streaming services.
 
