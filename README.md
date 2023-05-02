@@ -1,49 +1,124 @@
-# Project Documentation
+# Introduction 
 
-## Development of a Basic Web-Based Form Application with Database Integration: A Technical Overview
+* My project is about the implementation of a small-scale web application that allows users to submit a contact form, stores the submitted data in a JSON file, and provides an interface to query the stored data. The project also includes unit tests for the server's endpoints to ensure they are functioning correctly.
 
-## How to run my GO SERVER and it's output
 
-```go
-rawlings@Bills-MacBook-Pro project % go run main.go
-2023/05/01 15:42:13 Starting server on port 8080
+## Design of my project
+
+```sql
++----------+         +------------+
+|          |         |            |
+|   User   |  <----  |   System   |
+|          |         |            |
++----------+         +------------+
+     |                      |
+     |                      |
+     v                      v
++----------+         +------------+
+|          |         |            |
+| Database |  <----  |   Program  |
+|          |         |            |
++----------+         +------------+
+
 ```
 
-## How to run my python code and it's interactive output
+## Implementation of my project
+
+* The Python client application communicates with the web application through HTTP requests, and retrieves user information from the database using SQL queries. The database is implemented using SQLite and stores user information in a table with columns for id, name, email, and phone. The client application uses the SQLAlchemy ORM to interact with the database. The user data is also stored in a separate JSON file, which is read by the Go web application and used to populate the initial state of the database. The configuration files specify settings for the web application and database, such as the database file path and server port number.
+Evaluation and Testing of your Program
+
+
+Since there are multiple files involved in the project, I will provide instructions for running and testing each of them separately.
+
+
+### For the Go web application:
+
+Open a terminal and navigate to the project directory.
+Run the following command to start the web application: "go run main.go."
+Open a web browser and go to http://localhost:8080 to see the welcome page.
+To test the web application:
 
 ```py
-rawlings@Bills-MacBook-Pro project % python3 client.py
+Open a terminal and navigate to the project directory.
+Run the following command to start the test server: go run main.go test.
+rawlings@Bills-MacBook-Pro project % go run main.go test.
+2023/05/02 00:02:36 Starting server on port 8080
+2023/05/02 00:02:36 listen tcp :8080: bind: address already in use
+```
 
-Welcome to Bill's Go server! 🚀
-Email: ochieng@allegheny.com
+```py
+Open another terminal and navigate to the project directory.
+Run the following command to execute the test script: python3 test_client.py
+The output should indicate whether all test cases passed or not.
+
+
+rawlings@Bills-MacBook-Pro project % python test_client.py  
+FFE./Users/rawlings/.pyenv/versions/3.9.7/lib/python3.9/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name=10>
+  return self.run(*args, **kwds)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/rawlings/.pyenv/versions/3.9.7/lib/python3.9/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name=14>
+  return self.run(*args, **kwds)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+======================================================================
+ERROR: test_users (__main__.TestClient)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rawlings/Desktop/CMPSC-PL/-Efficient-Data-Exchange-and-Analysis-Building-a-Distributed-System-with-Golang-and-Python-using-gR/project/test_client.py", line 61, in test_users
+    p.stdin.write(b"quit\n")
+ValueError: write to closed file
+
+======================================================================
+FAIL: test_contact (__main__.TestClient)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rawlings/Desktop/CMPSC-PL/-Efficient-Data-Exchange-and-Analysis-Building-a-Distributed-System-with-Golang-and-Python-using-gR/project/test_client.py", line 35, in test_contact
+    self.assertIn("Contact", response.text)
+AssertionError: 'Contact' not found in 'Email: ochieng@allegheny.com'
+
+======================================================================
+FAIL: test_submit (__main__.TestClient)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rawlings/Desktop/CMPSC-PL/-Efficient-Data-Exchange-and-Analysis-Building-a-Distributed-System-with-Golang-and-Python-using-gR/project/test_client.py", line 46, in test_submit
+    self.assertEqual(response.status_code, 200)
+AssertionError: 400 != 200
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.344s
+
+FAILED (failures=2, errors=1)
+```
+
+### For the Python client:
+
+Open a terminal and navigate to the project directory.
+Run the following command to execute the client script: python3 client.py.
+Follow the prompts to query user data by name.
+Example program input and output:
+
+```py
+Enter a user's name to display their information, or type 'quit' to exit: Bill
+2023-05-01 23:41:21,776 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.phone AS users_phone 
+FROM users 
+WHERE users.name = ?
+ LIMIT ? OFFSET ?
+2023-05-01 23:41:21,776 INFO sqlalchemy.engine.Engine [cached since 10.71s ago] ('Bill', 1, 0)
+No user found with name 'Bill'.
 Enter a user's name to display their information, or type 'quit' to exit: Shereen
+2023-05-01 23:41:27,010 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.phone AS users_phone 
+FROM users 
+WHERE users.name = ?
+ LIMIT ? OFFSET ?
+2023-05-01 23:41:27,011 INFO sqlalchemy.engine.Engine [cached since 15.95s ago] ('Shereen', 1, 0)
 Name: Shereen
 Email: shereen@example.com
 Phone: 555-555-2222
 Enter a user's name to display their information, or type 'quit' to exit: 
+
 ```
 
-## Introduction
 
-- This project is a simple web application that provides a basic RESTful API to retrieve and manipulate user data. The application is developed using the Go programming language and is integrated with a database to store user data. The project includes a configuration file (config.json), a client-side Python script (client.py) to interact with the API, and the main source code file for the web application (main.go).
 
-## Files
 
-- config.json: This file contains the configuration settings for the web application, such as the server port, database name, username, and password.
-
-- client.py: This is a simple client script written in Python that demonstrates how to interact with the RESTful API provided by the web application. The script allows users to create, read, update, and delete user data.
-
-- main.go: This is the main source code file for the web application. It contains the handlers for each of the API endpoints, as well as the main function that initializes the HTTP server and connects to the database.
-
-## How it Works
-
-When the web application is launched, the main function in 'main.go' reads the configuration settings from "config.json", initializes a connection to the database, and then starts an HTTP server on the specified port. The HTTP server listens for incoming requests and routes them to the appropriate handler function based on the URL path. The web application is integrated with a database to store user data. The user data is represented using the User struct in main.go, and each user is stored as a row in the database.
-
-### API Endpoints
-
-- /: This endpoint returns a simple welcome message.
-- /contact: This endpoint returns the contact email address for the website.
-- /submit: This endpoint is used to submit a form with name and email fields. It returns a JSON response thanking the user for submitting the form and indicating that they will be contacted at the provided email address. The user data is stored in the database.
-/users: This endpoint returns a list of all users in JSON format. It also supports creating new users, updating existing users, and deleting users. The user data is stored in the database.
-Real-world Application
-This project can be used as a starting point for building more complex RESTful API services. It demonstrates how to handle HTTP requests, parse JSON data, and interact with a database to store and retrieve data. With additional development, this web application could be extended to support additional API endpoints, more complex data models, and integration with external services or databases. A real-world application for this project is a customer relationship management (CRM) system. The basic user data model provided in this project could be expanded to include additional fields such as customer addresses, phone numbers, and order histories. Additional API endpoints could be added to support features such as searching for customers by name, creating and updating orders, and generating reports on customer activity. The integration with a database provides a scalable and efficient solution for storing and retrieving large amounts of customer data.
+**CAN BE CONTINUED TO A BIGGER PROJECT 🚀😃
