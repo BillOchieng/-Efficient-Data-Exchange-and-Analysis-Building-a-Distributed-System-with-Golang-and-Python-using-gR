@@ -121,4 +121,19 @@ Enter a user's name to display their information, or type 'quit' to exit:
 
 
 
-**CAN BE CONTINUED TO A BIGGER PROJECT 🚀😃
+*CAN BE CONTINUED TO A BIGGER PROJECT 🚀😃
+
+- The type of concept demonstrated in the code is a basic client-server architecture used for communication between a client application and a server application over the internet. This type of architecture is commonly used in many real-time applications, such as online gaming, chat applications, and video streaming services.
+
+- For example, in online gaming, the client-server architecture is used to facilitate real-time communication between players and the game server. The client sends input from the player to the server, which then processes the input and sends the game state back to the client. This process happens rapidly and repeatedly, allowing for seamless real-time gameplay.
+
+- Similarly, chat applications use this architecture to allow users to send and receive messages in real-time. When a user sends a message, it is sent to the server and then broadcasted to all other connected clients in real-time, allowing for a seamless conversation experience.
+
+- Video streaming services also use this architecture to deliver video content to users in real-time. The client requests video data from the server, which then streams the data back to the client in real-time, allowing for uninterrupted video playback.
+
+- Anyway all i'm saying is the client-server architecture is an essential component of many real-time applications, enabling real-time communication and data transfer between clients and servers over the internet.
+
+
+
+
+
